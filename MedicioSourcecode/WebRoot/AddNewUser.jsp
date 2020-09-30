@@ -43,12 +43,10 @@ history.go(+1);
     dislpwd = request.getParameter("pwd");
     if(dislpwd == null)
     dislpwd = "";
-	String sauth = request.getParameter("auth");
-	if(sauth == null)
+	if(request.getParameter("auth") == null)
 	     auth=0;
 
 		auth = Integer.parseInt(sauth);
-	//System.out.println(disluserid+dislnewpwd+dislpwd);
 
 %>
 
@@ -71,7 +69,6 @@ try
 	stmt =  con.createStatement();
 
 	String Query = "SELECT * from Login where Userid = \'"+disluserid+"\'";
-	System.out.println(Query);
 	rs = stmt.executeQuery(Query);
 		
 }
@@ -96,10 +93,8 @@ if(rs.next())
 else{
 String UpdateQuery = 
 "Insert into Login values(\'"+disluserid+"\',\'"+dislpwd+"\',"+auth+")";
-//System.out.println(UpdateQuery);
-	int rowsAffected=stmt.executeUpdate(UpdateQuery);		
-	//System.out.println("Rows Affected = " + rowsAffected);
-if(rowsAffected==1)
+//System.out.println(UpdateQuery);		
+if(stmt.executeUpdate(UpdateQuery)==1)
 	{%>
 	
 	<script>
